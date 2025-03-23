@@ -3,22 +3,20 @@ package main
 import "fmt"
 
 func main() {
-    var name string
-    var age int
-    var hobby string
+	var name string
+	var age int
 
-    fmt.Print("Как вас зовут? ")
-    fmt.Scan(&name)
+	fmt.Print("Введите ваше имя: ")
+	fmt.Scan(&name)
 
-    fmt.Print("Сколько вам лет? ")
-    fmt.Scan(&age)
+	fmt.Print("Введите ваш возраст: ")
+	fmt.Scan(&age)
 
-    fmt.Print("Какое у вас хобби? ")
-    fmt.Scan(&hobby)
-
-    if age < 0 {
-        fmt.Println("Возраст не может быть отрицательным!")
-    } else {
-        fmt.Println("Привет,", name, "! Тебе", age, "лет, и твоё хобби -", hobby)
-    }
+	if age < 0 {
+		fmt.Println("Ошибка:", name, ", возраст не может быть отрицательным!")
+	} else if age < 18 {
+		fmt.Println("Привет,", name, "! Ты ещё молод, тебе всего", age, "лет.")
+	} else {
+		fmt.Println("Здравствуйте,", name, "! Вам уже", age, "лет, отличный возраст!")
+	}
 }
