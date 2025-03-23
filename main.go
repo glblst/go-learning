@@ -1,22 +1,26 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 func main() {
 	var name string
+	var yearBirth int
 	var age int
-
-	fmt.Print("Введите ваше имя: ")
+	fmt.Println("Ваше имя:")
 	fmt.Scan(&name)
+	fmt.Println("Ваш год рождения:")
+	fmt.Scan(&yearBirth)
+	currentTime := time.Now()
+	currentYear := currentTime.Year()
+	age = currentYear - yearBirth
 
-	fmt.Print("Введите ваш возраст: ")
-	fmt.Scan(&age)
-
-	if age < 0 {
-		fmt.Println("Ошибка:", name, ", возраст не может быть отрицательным!")
-	} else if age < 18 {
-		fmt.Println("Привет,", name, "! Ты ещё молод, тебе всего", age, "лет.")
+	if age <= 0 {
+		fmt.Println("Возраст не может быть меньше нуля")
 	} else {
-		fmt.Println("Здравствуйте,", name, "! Вам уже", age, "лет, отличный возраст!")
+		fmt.Printf("Приветствую %s, вам %d лет в %d году\n", name, age, currentYear)
 	}
+
 }
