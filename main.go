@@ -64,7 +64,7 @@ func lengthStr() {
 		fmt.Println("Нет")
 	}
 }
-func main() {
+//func main() {
 
 	lengthStr()
 	lowReg()
