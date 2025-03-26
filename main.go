@@ -1,75 +1,93 @@
 package main
 
-import (
-	"fmt"
-	"strings"
-)
+import "fmt"
 
-func getName() {
-	var name, lastName, fullName string
-	fmt.Println("Введите имя:")
-	fmt.Scan(&name)
-	if strings.TrimSpace(name) == "" {
-		fmt.Println("Ошибка: имя и фамилия не могут быть пустыми")
+func numbers() {
+	n := 0
+	sum := 0
+	number := 0
+	fmt.Println("Введите количество чисел:")
+	fmt.Scan(&n)
+	if n <= 0 {
+		fmt.Println("Ошибка: количество должно быть положительным.")
 		return
 	}
-	fmt.Println("Введите фамилию:")
-	fmt.Scan(&lastName)
-	if strings.TrimSpace(lastName) == "" {
-		fmt.Println("Ошибка: имя и фамилия не могут быть пустыми")
-		return
+	numbers := []int{}
+	for i := 1; i <= n; i++ {
+		fmt.Println("Введите цифру:")
+		fmt.Scan(&number)
+		numbers = append(numbers, number)
 	}
-	fullName = name + " " + lastName
-	fmt.Println("Полное имя:", fullName)
-	fmt.Println("Длина:", len(fullName))
-	fmt.Println("Верхний регистр:", strings.ToUpper(fullName))
-}
-func lenString() {
-	var getStr string
-	fmt.Println("Введите строку:")
-	fmt.Scan(&getStr)
-	fmt.Println("Длина строки:", len(getStr))
-}
-func twoStr() {
-	var str1, str2 string
-	fmt.Println("Введите первую строку:")
-	fmt.Scan(&str1)
-	fmt.Println("Введите вторую строку:")
-	fmt.Scan(&str2)
-	fmt.Println("Объединенные строки с дефисом", str1+"-"+str2)
-}
-func inclA() {
-	var str string
-	fmt.Println("Введите строку:")
-	fmt.Scan(&str)
-	if strings.Contains(str, "a") || strings.Contains(str, "A") {
-		fmt.Println("Строка содержит букву a.")
-	} else {
-		fmt.Println("Строка не содержит букву а.")
-	}
-}
-func lowReg() {
-	var str string
-	fmt.Println("Введите строку:")
-	fmt.Scan(&str)
-	fmt.Println("Строка в нижнем регистре:", strings.ToLower(str))
-}
-func lengthStr() {
-	var str string
-	fmt.Println("Введите строку:")
-	fmt.Scan(&str)
-	if len(str) > 5 {
-		fmt.Println("Да")
-	} else {
-		fmt.Println("Нет")
-	}
-}
-//func main() {
 
-	lengthStr()
-	lowReg()
-	inclA()
-	twoStr()
-	getName()
-	lenString()
+	for _, number := range numbers {
+		sum += number
+	}
+	fmt.Println("Все числа в срезе:", numbers)
+	fmt.Println("Сумма чисел в срезе:", sum)
+	fmt.Println("Среднее значение среза:", float64(sum)/float64(len(numbers)))
+}
+func sumArray() {
+
+	sum := 0
+	array := [5]int{1, 2, 3, 4, 5}
+	for _, num := range array {
+		sum += num
+	}
+	fmt.Println("Сумма чисел массива:", sum)
+}
+func threeSlice() {
+	var str string
+	threeSl := []string{}
+	for i := 1; i <= 3; i++ {
+		fmt.Println("Введите строку:")
+		fmt.Scan(&str)
+		threeSl = append(threeSl, str)
+	}
+	fmt.Println("В обратном порядке:")
+	for i := 1; i <= 3; i++ {
+
+		fmt.Println(threeSl[len(threeSl)-i])
+	}
+
+}
+func maxNum() {
+	numbers := []int{3, 7, 2, 4}
+	max := numbers[0]
+	for _, num := range numbers {
+		if max < num {
+			max = num
+		}
+
+	}
+	fmt.Printf("Максимальное значение в срезе %v = %d\n", number, max)
+}
+func whileZero() {
+	num := 0
+	numbers := []int{}
+	for {
+		fmt.Println("Введите число. По окончании введите 0.")
+		fmt.Scan(&num)
+		if num != 0 {
+			numbers = append(numbers, num)
+		} else {
+			fmt.Println(numbers)
+			break
+		}
+	}
+}
+func onlyEven() {
+	numbers := [6]int{1, 2, 3, 4, 5, 6}
+	for _, number := range numbers {
+		if number%2 == 0 {
+			fmt.Println(number)
+		}
+	}
+}
+func main() {
+	onlyEven()
+	whileZero()
+	maxNum()
+	threeSlice()
+	sumArray()
+	numbers()
 }
