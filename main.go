@@ -1,17 +1,16 @@
 package main
 
-import (
-	"bufio"
-	"fmt"
-	"os"
-	"strings"
-)
+import "fmt"
 
-func numberOfStudents() {
-	var n, sum int
+func gradeOfStudents() {
+	type Student struct {
+		Name  string
+		Grade int
+	}
+
+	var n, grade, sumGrade int
 	var name string
-	var grade int
-	students := make(map[string]int)
+	students := []Student{}
 	fmt.Println("Введите количество студентов:")
 	fmt.Scan(&n)
 	if n <= 0 {
@@ -23,102 +22,168 @@ func numberOfStudents() {
 		fmt.Scan(&name)
 		fmt.Println("Введите оценку студента:")
 		fmt.Scan(&grade)
-		students[name] = grade
-		sum += grade
-	}
-	for age, value := range students {
-		fmt.Printf("%s: %d\n", age, value)
-	}
+		students = append(students, Student{Name: name, Grade: grade})
 
-	fmt.Println("Средняя оценка:", float64(sum)/float64(len(students)))
-}
-func countryCapital() {
-	countries := make(map[string]string)
-	countries["США"] = "Вашингтон"
-	countries["Russia"] = "Москва"
-	countries["Япония"] = "Токио"
-	for key, value := range countries {
-		fmt.Printf("%s: %s\n", key, value)
 	}
+	fmt.Println("Список студентов:")
+	for _, student := range students {
+		fmt.Printf("%s: %d\n", student.Name, student.Grade)
+		sumGrade += student.Grade
+
+	}
+	fmt.Println("Средняя оценка: ", float64(sumGrade)/float64(len(students)))
+}
+
+type Book struct {
+	Title string
+	Pages int
+}
+
+func book() {
+
+	book := Book{Title: "Война и мир", Pages: 1200}
+	fmt.Printf("Название: %s, Страниц: %d\n", book.Title, book.Pages)
 
 }
-func nameRequest() {
-	names := make(map[string]int)
-	names["Мария"] = 30
-	names["Piter"] = 22
-	names["Alex"] = 33
-	names["Jon"] = 44
+
+func threeStudents() {
+	type Student struct {
+		Name  string
+		Grade int
+	}
 	var name string
-
-	fmt.Println("Enter name:")
-	fmt.Scan(&name)
-	key, ok := names[name]
-	if ok {
-		fmt.Printf("Есть такое имя %s, %d года.\n", name, key)
-	} else {
-		fmt.Println("Такого имени нет.")
+	var grade int
+	students := []Student{}
+	for i := 1; i <= 3; i++ {
+		fmt.Printf("Введите имя %d: ", i)
+		fmt.Scan(&name)
+		fmt.Printf("Введите оценку %d: ", i)
+		fmt.Scan(&grade)
+		students = append(students, Student{Name: name, Grade: grade})
 	}
-}
-func product() {
-	products := make(map[string]float64)
-	products["Apple"] = 22.3
-	products["Banana"] = 35.7
-	products["Jam"] = 88.12
-	products["Mango"] = 12.90
-	var max float64
-	var product string
-	for key, value := range products {
-		if value > max {
-			max = value
-			product = key
-
+	fmt.Println("Студенты с оценкой выше 3:")
+	for _, student := range students {
+		if student.Grade > 3 {
+			fmt.Printf("%s\n", student.Name)
 		}
 	}
-	fmt.Println("Самый дорогой продукт: ", product, max)
-
 }
-func emptyKey() {
-	names := make(map[string]int)
-	reader := bufio.NewReader(os.Stdin)
-	var name string
-	var age int
-	for {
-		fmt.Println("Enter name (or press Enter to finish):")
-		input, _ := reader.ReadString('\n')
-		name = strings.TrimSpace(input)
-		if name == "" {
-			break
+func fasterCar() {
+	type Car struct {
+		Model string
+		Speed int
+	}
+	var maxSpeed int
+	var maxSpeedCar Car
+	cars := []Car{
+		{Model: "BMW", Speed: 240},
+		{Model: "Toyota", Speed: 180},
+	}
 
+	for _, car := range cars {
+		if car.Speed > maxSpeed {
+			maxSpeed = car.Speed
+			maxSpeedCar = car
 		}
-		fmt.Println("Enter age:")
+	}
+	fmt.Printf("Самая быстрая машина: %s, скорость: %d\n", maxSpeedCar.Model, maxSpeedCar.Speed)
+}
+
+type Student struct {
+	Name  string
+	Grade int
+}
+
+func averageGrade(students []Student) float64 {
+	if len(students) == 0 {
+		return 0
+	}
+	var sum int
+	for _, student := range students {
+		sum += student.Grade
+	}
+	average := float64(sum) / float64(len(students))
+	return average
+}
+
+type Person struct {
+	Name string
+	Age  int
+}
+
+func oldPerson() {
+	persons := []Person{}
+	var name string
+	var age, maxOld int
+	var maxOldPerson Person
+	for i := 1; i <= 2; i++ {
+		fmt.Printf("Введите имя %d: ", i)
+		fmt.Scan(&name)
+		fmt.Printf("Введите возраст %d: ", i)
 		fmt.Scan(&age)
-		names[name] = age
-	}
+		persons = append(persons, Person{Name: name, Age: age})
 
-	for name, age := range names {
-		fmt.Printf("%s: %d\n", name, age)
 	}
+	for _, person := range persons {
+		if person.Age > maxOld {
+			maxOld = person.Age
+			maxOldPerson = person
+		}
+	}
+	fmt.Printf("Самый старший: %s\n", maxOldPerson.Name)
 }
-func heightAbove() {
-	names := make(map[string]int)
-	names["Maria"] = 130
-	names["Pavel"] = 150
-	names["Alex"] = 160
-	names["Pavel"] = 172
-	names["Jon"] = 192
-	for name, height := range names {
-		if height > 170 {
-			fmt.Printf("%s: %d\n", name, height)
+func bookMore200() {
+	var title string
+	var pages int
+
+	books := []Book{}
+	for i := 1; i <= 4; i++ {
+		fmt.Printf("Название %d: ", i)
+		fmt.Scan(&title)
+		fmt.Printf("Страниц %d: ", i)
+		fmt.Scan(&pages)
+		books = append(books, Book{Title: title, Pages: pages})
+
+	}
+	fmt.Println("Книги с более чем 200 страницами:")
+	for _, book := range books {
+		if book.Pages > 200 {
+			fmt.Println(book.Title)
 		}
 	}
 
+}
+
+type Product struct {
+	Name  string
+	Price float64
+}
+
+func cheapProduct() {
+
+	var minProduct Product
+	products := []Product{}
+	products = append(products, Product{Name: "Яблоко", Price: 10.5})
+	products = append(products, Product{Name: "Банан", Price: 15})
+	products = append(products, Product{Name: "Хлеб", Price: 5})
+	var minPrice float64 = products[0].Price
+	for _, product := range products {
+		if product.Price < minPrice {
+			minPrice = product.Price
+			minProduct = product
+		}
+	}
+	fmt.Printf("Самый дешевый продукт: %s, цена: %0.2f\n", minProduct.Name, minProduct.Price)
 }
 func main() {
-	heightAbove()
-	emptyKey()
-	product()
-	nameRequest()
-	countryCapital()
-	numberOfStudents()
+	cheapProduct()
+	bookMore200()
+	oldPerson()
+	student := []Student{{Name: "Иван", Grade: 5}, {Name: "Петров", Grade: 4}}
+	fmt.Printf("Средняя оценка: %.1f\n", averageGrade(student))
+	fasterCar()
+	threeStudents()
+	book()
+	gradeOfStudents()
 
 }
